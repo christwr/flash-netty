@@ -35,4 +35,15 @@ public class FirstServerHandler extends ChannelInboundHandlerAdapter {
 
         return buffer;
     }
+    @Override
+    public void channelActive(ChannelHandlerContext ctx) {
+        System.out.println(new Date() + ": 服务端主动写出数据");
+
+        // 1.获取数据
+        ByteBuf buffer = getByteBuf(ctx);
+
+        // 2.写数据
+        ctx.channel().writeAndFlush(buffer);
+    }
+
 }
